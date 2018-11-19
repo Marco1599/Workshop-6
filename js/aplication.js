@@ -1,4 +1,6 @@
 document.querySelector('#guardar').addEventListener('click', validateInputsRegistro);
+document.querySelector('#eliminar').addEventListener('click', deleteUser);
+
 
 function validateInputsRegistro() {
     var nombre = document.querySelector('#inputName').value;
@@ -18,4 +20,25 @@ function saveUser() {
         telefono = document.querySelector('#inputPhone').value
 
     addUserToSystem(nombre, apellidos, telefono);
+}
+
+function addUserToSystem(nombre, apellidos, telefono, usuario, password) {
+    var userList = [];
+    var newUser = {
+        nombre: nombre,
+        apellidos: apellidos,
+        telefono: telefono,
+        usuario: usuario,
+        password: password
+    };
+    userList = getUserList();
+    userList.push(newUser);
+    localStorageUserList(userList);
+}
+
+function deleteUser(){
+    var userList = getUserList();
+    var position = userList.length -1;
+    userList.pop();
+    localStorageUserList(userList);
 }
